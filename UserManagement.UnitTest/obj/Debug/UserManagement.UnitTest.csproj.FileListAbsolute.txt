@@ -1,0 +1,14 @@
+C:\Users\Sifiso Sikhakhane\source\repos\UserManagement\UserManagement.UnitTest\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+C:\Users\Sifiso Sikhakhane\source\repos\UserManagement\UserManagement.UnitTest\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+C:\Users\Sifiso Sikhakhane\source\repos\UserManagement\UserManagement.UnitTest\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+C:\Users\Sifiso Sikhakhane\source\repos\UserManagement\UserManagement.UnitTest\bin\Debug\UserManagement.UnitTest.dll
+C:\Users\Sifiso Sikhakhane\source\repos\UserManagement\UserManagement.UnitTest\bin\Debug\UserManagement.UnitTest.pdb
+C:\Users\Sifiso Sikhakhane\source\repos\UserManagement\UserManagement.UnitTest\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.dll
+C:\Users\Sifiso Sikhakhane\source\repos\UserManagement\UserManagement.UnitTest\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll
+C:\Users\Sifiso Sikhakhane\source\repos\UserManagement\UserManagement.UnitTest\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.xml
+C:\Users\Sifiso Sikhakhane\source\repos\UserManagement\UserManagement.UnitTest\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml
+C:\Users\Sifiso Sikhakhane\source\repos\UserManagement\UserManagement.UnitTest\obj\Debug\UserManagement.UnitTest.csproj.AssemblyReference.cache
+C:\Users\Sifiso Sikhakhane\source\repos\UserManagement\UserManagement.UnitTest\obj\Debug\UserManagement.UnitTest.csproj.CoreCompileInputs.cache
+C:\Users\Sifiso Sikhakhane\source\repos\UserManagement\UserManagement.UnitTest\obj\Debug\UserManagement.UnitTest.csproj.CopyComplete
+C:\Users\Sifiso Sikhakhane\source\repos\UserManagement\UserManagement.UnitTest\obj\Debug\UserManagement.UnitTest.dll
+C:\Users\Sifiso Sikhakhane\source\repos\UserManagement\UserManagement.UnitTest\obj\Debug\UserManagement.UnitTest.pdb

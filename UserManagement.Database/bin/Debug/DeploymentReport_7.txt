@@ -1,0 +1,35 @@
+﻿** Highlights
+     Tables that will be rebuilt
+       None
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       None
+
+** User actions
+     Create
+       [dbo].[Group] (Table)
+       [dbo].[GroupMenuPermission] (Table)
+       [dbo].[NavigationMenu] (Table)
+       [dbo].[UserGroup] (Table)
+       [dbo].[Users] (Table)
+       Default Constraint: unnamed constraint on [dbo].[Group] (Default Constraint)
+       Default Constraint: unnamed constraint on [dbo].[Users] (Default Constraint)
+       Default Constraint: unnamed constraint on [dbo].[Users] (Default Constraint)
+       Default Constraint: unnamed constraint on [dbo].[Users] (Default Constraint)
+       Default Constraint: unnamed constraint on [dbo].[Users] (Default Constraint)
+       Default Constraint: unnamed constraint on [dbo].[Users] (Default Constraint)
+       [dbo].[FK_RoleMenuPermission_Group] (Foreign Key)
+       [dbo].[FK_RoleMenuPermission_NavigationMenu] (Foreign Key)
+       [dbo].[FK_NavigationMenu_NavigationMenu_ParentMenuId] (Foreign Key)
+       [dbo].[FK_UserRoles_Users] (Foreign Key)
+       [dbo].[FK_UserRoles_Role] (Foreign Key)
+       [dbo].[spr_AddUser] (Procedure)
+       [dbo].[spr_CheckIfUserExistByEmailIdAndPasswordAndUpdateLastLogin] (Procedure)
+       [dbo].[spr_GetPermissionsByRoleId] (Procedure)
+       [dbo].[spr_ValidateUserLogin] (Procedure)
+       [dbo].[spr_GetMenuItem] (Procedure)
+
+** Supporting actions

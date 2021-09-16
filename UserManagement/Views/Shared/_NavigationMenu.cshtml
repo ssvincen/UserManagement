@@ -1,0 +1,65 @@
+﻿<div class="container">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        @Html.ActionLink("User Management", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+    </div>
+    <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+            <li>@Html.ActionLink("About", "About", "Home")</li>
+        </ul>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav  navbar-collapse collapse">
+                @{
+                    List<UserManagement.Models.NavigationMenuView> menuViews = ViewBag.MainMenu;
+                    foreach (var item in menuViews)
+                    {
+                        if (item.ParentMenuId == null) //Level one items will have null parent id
+                        {
+                            if (!string.IsNullOrWhiteSpace(item.ControllerName))
+                            {
+                                <li class="dropdown">
+                                    <a href="" class="dropdown-toggle" data-toggle="dropdown">@item.Name<b class="caret"></b></a>
+                                    <ul class="dropdown-menu">
+                                        <li>@Html.ActionLink(item.Name, item.ActionName, item.ControllerName, routeValues: new { }, htmlAttributes: new { title = item.ActionName })</li>
+                                    </ul>
+                                </li>
+                            }
+                            if (item.IsExternal && !string.IsNullOrWhiteSpace(item.ExternalUrl))
+                            {
+                                <li class="nav-item active">
+                                    <a target="_blank" class="nav-link text" href="@item.ExternalUrl">@item.Name</a>
+                                </li>
+                            }
+                            var children = menuViews.Where(x => x.ParentMenuId == item.Id && x.Visible).OrderBy(x => x.DisplayOrder);
+                            if (children != null)
+                            {
+                                <li class="dropdown">
+                                    <a href="" class="dropdown-toggle" data-toggle="dropdown">@item.Name<b class="caret"></b></a>
+                                    <ul class="dropdown-menu">
+                                        @foreach (var itm in children)
+                                        {
+                                            if (itm.IsExternal && !string.IsNullOrWhiteSpace(itm.ExternalUrl))
+                                            {
+                                                <li><a target="_blank" class="dropdown-item" href="@itm.ExternalUrl">@itm.Name</a></li>
+                                            }
+                                            else
+                                            {
+                                                <li>@Html.ActionLink(itm.Name, itm.ActionName, itm.ControllerName, routeValues: new { }, htmlAttributes: new { title = itm.ActionName })</li>
+                                            }
+                                        }
+                                    </ul>
+                                </li>
+                            }
+                        }
+                    }
+                }
+            </ul>
+            @Html.Partial("_LoginPartial")
+        </div>
+       
+    </div>
+</div>

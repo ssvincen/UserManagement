@@ -1,0 +1,10 @@
+C:\Users\Sifiso Sikhakhane\source\repos\UserManagement\UserManagement.Database\bin\Debug\UserManagement.Database.dacpac
+C:\Users\Sifiso Sikhakhane\source\repos\UserManagement\UserManagement.Database\bin\Debug\UserManagement.Database.dll
+C:\Users\Sifiso Sikhakhane\source\repos\UserManagement\UserManagement.Database\bin\Debug\UserManagement.Database.pdb
+C:\Users\Sifiso Sikhakhane\source\repos\UserManagement\UserManagement.Database\obj\Debug\UserManagement.Database.dll
+C:\Users\Sifiso Sikhakhane\source\repos\UserManagement\UserManagement.Database\obj\Debug\UserManagement.Database.pdb
+C:\Users\Sifiso Sikhakhane\source\repos\UserManagement\UserManagement.Database\obj\Debug\UserManagement.Database.sqlproj.AssemblyReference.cache
+C:\Users\Sifiso Sikhakhane\source\repos\UserManagement\UserManagement.Database\obj\Debug\Model.xml
+C:\Users\Sifiso Sikhakhane\source\repos\UserManagement\UserManagement.Database\obj\Debug\refactor.xml
+C:\Users\Sifiso Sikhakhane\source\repos\UserManagement\UserManagement.Database\obj\Debug\postdeploy.sql
+C:\Users\Sifiso Sikhakhane\source\repos\UserManagement\UserManagement.Database\obj\Debug\predeploy.sql

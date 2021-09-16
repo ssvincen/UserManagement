@@ -1,0 +1,7 @@
+﻿CREATE TABLE [dbo].[Group]
+(
+	Id INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
+	[Name] VARCHAR(100) NOT NULL,
+	[Description] VARCHAR(MAX),
+	[Active] BIT NOT NULL DEFAULT(1)
+)
