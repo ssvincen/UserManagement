@@ -66,16 +66,19 @@ namespace UserManagement
             throw new System.NotImplementedException();
         }
 
-        public Task<IEnumerable<NavigationMenuView>> GetPermissionsByRoleIdAsync(string id)
+        public async Task<IEnumerable<NavigationMenuView>> GetPermissionsByGroupIdAsync(int id)
         {
+            var param = new DynamicParameters();
+            param.Add("@GroupId", dbType: DbType.String, value: id, direction: ParameterDirection.Input);
             using (var db = _connectionManager.UserManagementDB())
             {
-
+                return await db.QueryAsync<NavigationMenuView>("dbo.spr_GetPermissionByGroupId",
+                    commandType: CommandType.StoredProcedure, param: param);
             }
             throw new System.NotImplementedException();
         }
 
-        public Task<bool> SetPermissionsByRoleIdAsync(string id, IEnumerable<long> permissionIds)
+        public Task<bool> SetPermissionsByGroupIdAsync(int id, IEnumerable<long> permissionIds)
         {
             using (var db = _connectionManager.UserManagementDB())
             {
@@ -111,6 +114,28 @@ namespace UserManagement
             using (var db = _connectionManager.UserManagementDB())
             {
                 return await db.QueryAsync<UserViewModel>("dbo.spr_GetAllUsers",
+                    commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        public async Task<ResponseHelper> AddGroupAsync(GroupModel model)
+        {
+            var param = new DynamicParameters();
+            param.Add("@Name", dbType: DbType.String, value: model.Name, direction: ParameterDirection.Input);
+            param.Add("@Description", dbType: DbType.String, value: model.Description, direction: ParameterDirection.Input);
+
+            using (var db = _connectionManager.UserManagementDB())
+            {
+                return await db.QueryFirstOrDefaultAsync<ResponseHelper>("dbo.spr_AddGroup",
+                    commandType: CommandType.StoredProcedure, param: param);
+            }
+        }
+
+        public async Task<IEnumerable<GroupModelView>> GetAllActiveGroupsAsync()
+        {
+            using (var db = _connectionManager.UserManagementDB())
+            {
+                return await db.QueryAsync<GroupModelView>("dbo.spr_GetAllActiveGroups",
                     commandType: CommandType.StoredProcedure);
             }
         }

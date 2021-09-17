@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -99,10 +100,68 @@ namespace UserManagement.Controllers
         }
 
 
+        public ActionResult CreateGroup()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> CreateGroup(GroupModel group)
+        {
+            bool isError = false;
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var res = await _dataAccess.AddGroupAsync(group);
+                    ViewBag.Message = res.Message;
+                    ViewBag.Status = res.Result;
+                    return View();
+                }
+                return View(group);
+            }
+            catch (Exception exception)
+            {
+                isError = true;
+                ViewBag.IsError = isError;
+                ModelState.AddModelError("", exception.Message);
+                return View(group);
+            }
+        }
         public async Task<ActionResult> Users()
         {
             return View(await _dataAccess.GetAllUserAsync());
         }
+
+        public async Task<ActionResult> Groups()
+        {
+            return View(await _dataAccess.GetAllActiveGroupsAsync());
+        }
+
+        public async Task<ActionResult> LinkGroup(int id)
+        {
+            return View(await _dataAccess.GetPermissionsByGroupIdAsync(id));
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> LinkGroup(string id, List<NavigationMenuView> viewModel)
+        {
+            try
+            {
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            return View();
+        }
+
 
 
 

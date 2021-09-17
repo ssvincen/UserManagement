@@ -75,11 +75,12 @@ VALUES (1,'Operator', NULL, NULL, '', '', 0, NULL,1,1),
 	   (3,'Report', NULL, NULL, '', '', 0, NULL,1,1),
 	   (4,'Create User', 1, NULL, 'Account', 'CreateUser', 0, NULL,1,1),
 	   (5,'Create Group', 1, NULL, 'Account', 'CreateGroup', 0, NULL,2,1),
-	   (6,'Link Group', 1, NULL, 'Account', 'LinkGroup', 0, NULL,3,1),
-	   (7,'Link User', 1, NULL, 'Account', 'LinkUser', 0, NULL,4,1),
-	   (8,'Users', 2, NULL, 'Account', 'Users', 0, NULL,1,1),
-	   (9,'Edit User', 2, NULL, 'Account', 'EditUser', 0, NULL,4,0),
-	   (10,'List Users', 3, NULL, 'Account', 'Users', 0, NULL,1,1)
+	   (6,'Groups', 1, NULL, 'Account', 'Groups', 0, NULL, 5, 1),
+	   (7,'Link Group', 1, NULL, 'Account', 'LinkGroup', 0, NULL,3,0),
+	   (8,'Link User', 1, NULL, 'Account', 'LinkUser', 0, NULL,4,1),
+	   (9,'Users', 2, NULL, 'Account', 'Users', 0, NULL,1,1),
+	   (10,'Edit User', 2, NULL, 'Account', 'EditUser', 0, NULL,4,0),
+	   (11,'List Users', 3, NULL, 'Account', 'Users', 0, NULL,1,1)
 
 INSERT INTO dbo.NavigationMenu([Name], [ParentMenuId], [Area], [ControllerName], [ActionName], [IsExternal], [ExternalUrl], [DisplayOrder], [Visible])
 SELECT [Name], [ParentMenuId], [Area], [ControllerName], [ActionName], [IsExternal], [ExternalUrl], [DisplayOrder], [Visible] 

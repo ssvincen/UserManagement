@@ -681,6 +681,113 @@
 			</Relationship>
 			<AttachedAnnotation Disambiguator="15" />
 		</Element>
+		<Element Type="SqlProcedure" Name="[dbo].[spr_AddGroup]">
+			<Property Name="BodyScript">
+				<Value><![CDATA[
+DECLARE @result BIT = 0, @newId BIGINT, @message VARCHAR(100) = '';
+BEGIN
+SET NOCOUNT ON;
+IF NOT EXISTS (SELECT TOP 1 Id FROM dbo.[Group] WHERE [Name] = @Name)
+	BEGIN
+		DECLARE @UserId BIGINT
+		INSERT INTO dbo.[Group]([Name], [Description])
+		VALUES(@Name, @Description)
+		SET @newId = (SELECT SCOPE_IDENTITY());
+
+		SET @result = 1;
+		SET @message = 'Update Successfull';
+	END
+ELSE
+	BEGIN
+		SET @result = 0;
+		SET @newId = (SELECT TOP 1 Id FROM dbo.[Group] WHERE [Name] = @Name);
+		SET @message = 'Group Name alread exist';
+	END
+SELECT @result [Result], @message [Message], @newId [Id]
+END]]></Value>
+			</Property>
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[bit]" />
+				</Entry>
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[bigint]" />
+				</Entry>
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[varchar]" />
+				</Entry>
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[bigint]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Group]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Group].[Id]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Group].[Name]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[spr_AddGroup].[@Name]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Group].[Name]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Group].[Description]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[spr_AddGroup].[@Description]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="SqlSubroutineParameter" Name="[dbo].[spr_AddGroup].[@Name]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="Length" Value="100" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSubroutineParameter" Name="[dbo].[spr_AddGroup].[@Description]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="IsMax" Value="True" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="Schema">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="Length" Value="702" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="CREATE PROCEDURE [dbo].[spr_AddGroup]&#xD;&#xA;&#x9;@Name VARCHAR(100),&#xD;&#xA;&#x9;@Description VARCHAR(MAX)&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
 		<Element Type="SqlProcedure" Name="[dbo].[spr_AddUser]">
 			<Property Name="BodyScript">
 				<Value><![CDATA[
@@ -992,6 +1099,52 @@ SELECT @result [Result], @message [Message], @newId [Id]]]></Value>
 				<Property Name="StartLine" Value="1" />
 				<Property Name="StartColumn" Value="1" />
 				<Property Name="HeaderContents" Value="CREATE PROCEDURE [dbo].[spr_CheckIfUserExistByEmailIdAndPasswordAndUpdateLastLogin]&#xD;&#xA;&#x9;@EmailId VARCHAR(200),&#xD;&#xA;&#x9;@Password VARCHAR(250)&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="SqlProcedure" Name="[dbo].[spr_GetAllActiveGroups]">
+			<Property Name="BodyScript">
+				<Value><![CDATA[
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+	SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED
+
+	SELECT Id
+		  ,[Name]
+		  ,[Description]
+	FROM dbo.[Group]
+	WHERE Active = 1
+END]]></Value>
+			</Property>
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References Name="[dbo].[Group]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Group].[Id]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Group].[Name]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Group].[Description]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[Group].[Active]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Schema">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="Length" Value="318" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="CREATE PROCEDURE [dbo].[spr_GetAllActiveGroups]&#xD;&#xA;AS" />
 			</Annotation>
 		</Element>
 		<Element Type="SqlProcedure" Name="[dbo].[spr_GetAllUsers]">
@@ -1310,6 +1463,106 @@ END]]></Value>
 				<Property Name="StartLine" Value="1" />
 				<Property Name="StartColumn" Value="1" />
 				<Property Name="HeaderContents" Value="CREATE PROCEDURE [dbo].[spr_GetMenuItem]&#xD;&#xA;&#x9;@RoleId INT,&#xD;&#xA;&#x9;@ControllerName NVARCHAR(MAX),&#xD;&#xA;&#x9;@ActionName NVARCHAR(MAX)&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="SqlProcedure" Name="[dbo].[spr_GetPermissionByGroupId]">
+			<Property Name="BodyScript">
+				<Value><![CDATA[
+BEGIN
+
+	SET NOCOUNT ON;
+	SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
+
+	  SELECT nm.Id
+			,nm.[Name]
+			,nm.Area
+			,nm.ActionName
+			,nm.ControllerName
+			,nm.IsExternal
+			,nm.ExternalUrl
+			,nm.DisplayOrder
+			,nm.ParentMenuId
+			,nm.Visible
+	  FROM dbo.NavigationMenu nm LEFT JOIN dbo.GroupMenuPermission gmp
+	  ON nm.Id = gmp.NavigationMenuId
+	  WHERE gmp.GroupId = @GroupId
+END]]></Value>
+			</Property>
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References Name="[dbo].[NavigationMenu]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[GroupMenuPermission]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[NavigationMenu].[Id]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[GroupMenuPermission].[NavigationMenuId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[NavigationMenu].[Name]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[NavigationMenu].[Area]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[NavigationMenu].[ActionName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[NavigationMenu].[ControllerName]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[NavigationMenu].[IsExternal]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[NavigationMenu].[ExternalUrl]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[NavigationMenu].[DisplayOrder]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[NavigationMenu].[ParentMenuId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[NavigationMenu].[Visible]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[GroupMenuPermission].[GroupId]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[spr_GetPermissionByGroupId].[@GroupId]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="SqlSubroutineParameter" Name="[dbo].[spr_GetPermissionByGroupId].[@GroupId]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="Schema">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="Length" Value="478" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="CREATE PROCEDURE [dbo].[spr_GetPermissionByGroupId]&#xD;&#xA;&#x9;@GroupId INT&#xD;&#xA;AS" />
 			</Annotation>
 		</Element>
 		<Element Type="SqlProcedure" Name="[dbo].[spr_GetPermissionsByRoleId]">

@@ -1,0 +1,34 @@
+﻿@model IEnumerable<UserManagement.Models.NavigationMenuView>
+
+@{
+    ViewBag.Title = "LinkGroup";
+}
+
+
+<h1>Edit Group Permission</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="EditRolePermission">
+            <div class="form-group">
+                <ul style="list-style-type: none;">
+                    @foreach (var item in Model)
+                    {
+                        <li>
+                            <input type="checkbox" asp-for="@item.Permitted" />
+                            <label style="margin-left:10px;" asp-for="@item.Permitted">@item.Name</label>
+                            <input type="hidden" asp-for="@item.Id" />
+                            <input type="hidden" asp-for="@item.Name" />
+                        </li>
+                    }
+                </ul>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+                <a asp-action="Roles"></a>
+                @Html.ActionLink("Back to List", "Groups")
+            </div>
+        </form>
+    </div>
+</div>

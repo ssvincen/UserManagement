@@ -75,6 +75,9 @@
     <Build Include="Table\Account\UserGroup.sql" />
     <Build Include="StoreProcedures\Account\spr_GetPermissionsByUsername.sql" />
     <Build Include="StoreProcedures\Account\spr_GetAllUsers.sql" />
+    <Build Include="StoreProcedures\Account\spr_AddGroup.sql" />
+    <Build Include="StoreProcedures\Account\spr_GetAllActiveGroups.sql" />
+    <Build Include="StoreProcedures\Account\spr_GetPermissionByGroupId.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Presets\Script.PostDeployment.sql" />
