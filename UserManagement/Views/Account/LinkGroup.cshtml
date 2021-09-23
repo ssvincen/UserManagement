@@ -16,10 +16,10 @@
                     @foreach (var item in Model)
                     {
                         <li>
-                            <input type="checkbox" asp-for="@item.Permitted" />
+                            <input type="checkbox" checked="@item.Permitted">
                             <label style="margin-left:10px;" asp-for="@item.Permitted">@item.Name</label>
-                            <input type="hidden" asp-for="@item.Id" />
-                            <input type="hidden" asp-for="@item.Name" />
+                            <input type="hidden" value="@item.Id" />
+                            <input type="hidden" value="@item.Name" />
                         </li>
                     }
                 </ul>
